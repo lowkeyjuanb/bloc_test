@@ -26,43 +26,54 @@ class MyApp extends StatelessWidget {
             )),
           ),
           backgroundColor: Colors.white,
-          body: BlocProvider(
-            create: (context) => CounterBloc(),
-            child: BlocBuilder<CounterBloc, CounterState>(
-              builder: (context, state) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                        child: Text(state.count.toString(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 50))),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FloatingActionButton.small(
-                          onPressed: () {
-                            // Add your onPressed code here!
-                            context.read<CounterBloc>().add(CountDecrement());
-                          },
-                          child: const Icon(Icons.remove),
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        FloatingActionButton.small(
-                          onPressed: () {
-                            context.read<CounterBloc>().add(CountIncrement());
-                          },
-                          child: const Icon(Icons.add),
-                        ),
-                      ],
-                    )
-                  ],
-                );
-              },
-            ),
-          ),
+          body: const CounterContent(),
         ));
+  }
+}
+
+class CounterContent extends StatelessWidget {
+  const CounterContent({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: BlocBuilder<CounterBloc, CounterState>(
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Text(state.count.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 50))),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FloatingActionButton.small(
+                    onPressed: () {
+                      // Add your onPressed code here!
+                      context.read<CounterBloc>().add(CountDecrement());
+                    },
+                    child: const Icon(Icons.remove),
+                  ),
+                  const SizedBox(
+                    width: 25,
+                  ),
+                  FloatingActionButton.small(
+                    onPressed: () {
+                      context.read<CounterBloc>().add(CountIncrement());
+                    },
+                    child: const Icon(Icons.add),
+                  ),
+                ],
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 }
