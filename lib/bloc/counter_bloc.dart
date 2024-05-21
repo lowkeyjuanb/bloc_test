@@ -7,12 +7,12 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(CounterState()) {
     on<CountIncrement>(
       (event, emit) {
-        emit(state.copyWidth(count: state.count++));
+        emit(state.copyWidth(count: state.count+1));
       },
     );
     on<CountDecrement>(
       (event, emit) {
-        emit(state.copyWidth(count: state.count--));
+        emit(state.copyWidth(count: state.count-1));
       },
     );
   }
